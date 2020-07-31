@@ -1,0 +1,43 @@
+version: "3.7"
+services:
+  app:
+    build:
+      args:
+        user: demo
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: adpe/laravel-demo
+    working_dir: /var/www/html
+    volumes:
+      - ./www:/var/www/html
+    networks:
+      - laravel
+
+  webserver:
+    image: nginx:alpine
+    ports:
+      - 8000:80
+    volumes:
+      - ./www:/var/www/html
+      - ./provision/nginx:/etc/nginx/conf.d/
+    networks:
+      - laravel
+
+  db:
+    image: mariadb:10.2
+    environment:
+      MYSQL_DATABASE: laravel
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_PASSWORD: secret
+      MYSQL_USER: laravel_user
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - ./provision/mysql:/docker-entrypoint-initdb.d
+    networks:
+      - laravel
+
+networks:
+  laravel:
+    driver: bridge
