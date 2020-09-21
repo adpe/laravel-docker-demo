@@ -8,6 +8,7 @@ services:
       context: ./
       dockerfile: Dockerfile
     image: adpe/laravel-demo:mssql
+    restart: unless-stopped
     working_dir: /var/www/html
     volumes:
       - ./www:/var/www/html
@@ -16,6 +17,7 @@ services:
 
   webserver:
     image: nginx:alpine
+    restart: unless-stopped
     ports:
       - 8000:80
     volumes:
@@ -26,6 +28,7 @@ services:
 
   db:
     image: mariadb:10.2
+    restart: unless-stopped
     environment:
       MYSQL_DATABASE: laravel
       MYSQL_ROOT_PASSWORD: secret
