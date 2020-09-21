@@ -9,7 +9,7 @@ To get started, make sure you have [Docker installed](https://docs.docker.com/do
 ## Installation
 1. Clone this repository `git clone https://github.com/adpe/laravel-docker-demo.git`
 2. Navigate to the directory you cloned this repository.
-3. Build or pull image `docker pull adpe/laravel-demo` and spin up the containers for the web server by running `docker-compose up -d`.
+3. Build or pull image `docker pull adpe/laravel-demo:mssql` and spin up the containers for the web server by running `docker-compose up -d`.
 4. Cleanup and prepare `www` directory, run `docker-compose exec app rm .gitkeep`.
 5. After that create a new Laravel project with `docker-compose exec app composer create-project laravel/laravel .` or provide your existing Laravel project files in the `www` directory, run if your provide a existing project and neccesary these commands:
    - `docker-compose exec app composer install`
