@@ -9,6 +9,8 @@ services:
       dockerfile: Dockerfile
     image: adpe/laravel-demo:latest
     restart: unless-stopped
+    environment:
+      PHP_IDE_CONFIG: "serverName=laravel-demo"
     working_dir: /var/www/html
     volumes:
       - ./www:/var/www/html
